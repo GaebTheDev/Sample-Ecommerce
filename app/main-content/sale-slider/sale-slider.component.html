@@ -1,0 +1,13 @@
+<div class="flex justify-center w-full">
+    <!-- style is for pagination color, cannot change with tailwind -->
+    <swiper-container class="w-full bg-purple-100" style="--swiper-pagination-color: purple;" speed="1000"
+        autoplay-delay="2000" pagination="true" lazy="true" pagination-clickable="true"
+        pagination-dynamic-bullets="true">
+
+        @for (imgUrl of imgUrls; track $index) {
+        <swiper-slide class="flex justify-center items-center pt-4 pb-8">
+            <img [src]="imgUrl" class="w-11/12 max-w-4xl rounded-md ">
+        </swiper-slide>
+        }
+    </swiper-container>
+</div>

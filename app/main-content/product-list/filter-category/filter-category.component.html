@@ -1,0 +1,14 @@
+<div class="flex items-baseline justify-center">
+
+    <p class="text-purple-800 font-quattrocento text-lg lg:text-xl mr-2">Categories: </p>
+
+    <select
+        class="p-1 m-1 w-1/2 md:w-full hover:cursor-pointer border border-purple-800 rounded-md font-quattrocento-sans md:text-lg lg:text-xl"
+        (change)="onCategoryChosen($event)">
+        @for (category of categories; track $index) {
+        <option value="{{category}}" class="font-quattrocento-sans">{{category}}</option>
+        }
+    </select>
+
+
+</div>
