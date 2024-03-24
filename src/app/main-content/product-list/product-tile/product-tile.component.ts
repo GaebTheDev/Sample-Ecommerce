@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-product-tile',
@@ -8,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrl: './product-tile.component.css'
 })
 export class ProductTileComponent {
+
+  @Input()
+  product: {
+    id: number,
+    title: string,
+    price: number,
+    category: string,
+    description: string,
+    image: string,
+  };
 
 }
