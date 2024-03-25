@@ -14,6 +14,7 @@ import { FilterCategoryComponent } from './filter-category/filter-category.compo
 export class ProductListComponent implements OnInit {
   products: any[] = [];
   categories: string[] = [];
+  selectedCategory: string = 'all';
 
   constructor(private productService: ProductsService) {
   }
@@ -24,6 +25,11 @@ export class ProductListComponent implements OnInit {
     }, (error) => {
       console.error(error);
     })
+  }
+
+  onCategoryChanged(value: string) {
+    this.selectedCategory = value;
+    console.log(this.selectedCategory);
   }
 
 }

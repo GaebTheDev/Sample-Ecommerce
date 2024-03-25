@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ProductsService } from '../../../services/products.service';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -27,9 +27,17 @@ export class FilterCategoryComponent {
     })
   };
 
-  onCategoryChosen(event: any) {
-    console.log(event.target?.value);
-    this.chosenCategory = event.target?.value;
+  // onCategoryChosen(event: any) {
+  //   console.log(event.target?.value);
+  //   this.chosenCategory = event.target?.value;
+  // }
+
+  // code from Procademy Angular Tutorial Playlist video #27
+  @Output()
+  categoryChanged: EventEmitter<string> = new EventEmitter<string>();
+
+  onCategoryChanged() {
+    this.categoryChanged.emit(this.chosenCategory);
   }
 
 

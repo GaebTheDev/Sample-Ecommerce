@@ -4,7 +4,7 @@
 
     <select
         class="p-1 m-1 w-1/2 md:w-full hover:cursor-pointer border border-purple-800 rounded-md font-quattrocento-sans md:text-lg lg:text-xl"
-        (change)="onCategoryChosen($event)">
+        (change)="onCategoryChanged()" [(ngModel)]="chosenCategory">
         @for (category of categories; track $index) {
         <option value="{{category}}" class="font-quattrocento-sans">{{category}}</option>
         }
