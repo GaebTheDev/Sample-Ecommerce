@@ -3,7 +3,8 @@
         <app-search-bar></app-search-bar>
         <app-filter-category></app-filter-category>
     </div>
-    <div class="w-full grid grid-cols-2 md:grid-cols-3 auto-rows-fr gap-2 pt-3 p-2 items-center justify-center">
+    <div
+        class="w-full grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3 md:grid-cols-5 lg:grid-cols-6 lg:gap-5 auto-rows-fr pt-3 p-2 sm:p-4 lg:p-8">
         @for (product of products; track $index) {
         <app-product-tile [product]=product>
         </app-product-tile>
