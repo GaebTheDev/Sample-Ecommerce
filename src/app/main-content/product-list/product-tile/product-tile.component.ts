@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Product } from '../../../models/Product';
 
 @Component({
   selector: 'app-product-tile',
@@ -8,15 +9,8 @@ import { Component, Input } from '@angular/core';
   styleUrl: './product-tile.component.css'
 })
 export class ProductTileComponent {
-
+  
   @Input()
-  product: {
-    id: number,
-    title: string,
-    price: number,
-    category: string,
-    description: string,
-    image: string,
-  };
+  product: Product;
 
 }

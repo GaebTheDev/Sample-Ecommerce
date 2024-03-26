@@ -27,16 +27,14 @@ export class FilterCategoryComponent {
     })
   };
 
-  // onCategoryChosen(event: any) {
-  //   console.log(event.target?.value);
-  //   this.chosenCategory = event.target?.value;
-  // }
-
   // code from Procademy Angular Tutorial Playlist video #27
+  // declared an event below that emits a value whenever function onCategoryChanged is called
   @Output()
   categoryChanged: EventEmitter<string> = new EventEmitter<string>();
 
   onCategoryChanged() {
+    //emits categoryChanged event  whenever this method is called
+    //value passed is return as is 
     this.categoryChanged.emit(this.chosenCategory);
   }
 

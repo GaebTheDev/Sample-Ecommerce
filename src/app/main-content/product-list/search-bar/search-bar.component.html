@@ -1,9 +1,9 @@
 <div class="flex items-center justify-center">
     <input type="text"
         class="font-quattrocento-sans md:text-lg lg:text-xl border w-3/4 md:w-full focus:outline-purple-200 focus:outline-1 px-1 lg:px-4 mx-2 my-4 placeholder-italic rounded-sm"
-        placeholder="Search Product">
+        placeholder="Search Product" #searchInput>
     <button>
-        <fa-icon [icon]="faMagnifyingGlass" class="text-purple-700 text-2xl lg:text3xl hover:cursor-pointer">
+        <fa-icon [icon]="faMagnifyingGlass" class="text-purple-700 text-2xl lg:text3xl hover:cursor-pointer hover:text-purple-500 active:text-purple-300" (click)="setSearchText()">
         </fa-icon>
     </button>
 </div>
