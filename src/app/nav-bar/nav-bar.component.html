@@ -3,16 +3,15 @@
         <div class="flex items-center hover:cursor-pointer">
             <fa-icon [icon]="faShop" class="text-4xl text-white mr-2"></fa-icon>
             <p class="text-3xl font-quattrocento text-white font-extrabold">E-com</p>
-        </div>
+        </div>  
         <div class="items-center space-x-4 md:space-x-10 lg:space-x-14 xl:space-x-20 hidden sm:flex ">
-            <p class="font-quattrocento-sans text-white transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer">Home</p>
-            <p class="font-quattrocento-sans text-white transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer">Shop</p>
-            <p class="font-quattrocento-sans text-white transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer">Deals</p>
-            <p class="font-quattrocento-sans text-white transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer">What's New
+            <p routerLink="/" routerLinkActive="text-purple-300 underline underline-offset-8 decoration-4 rounded transition-all" [routerLinkActiveOptions]="{exact:true}" class="font-quattrocento-sans text-white transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer ">Home</p>
+            <p routerLink="/deals" routerLinkActive="text-purple-300 underline underline-offset-8 decoration-4 rounded transition-all" [routerLinkActiveOptions]="{exact:true}" class="font-quattrocento-sans text-white transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer">Deals</p>
+            <p routerLink="/whats-new" routerLinkActive="text-purple-300 underline underline-offset-8 decoration-4 rounded transition-all" [routerLinkActiveOptions]="{exact:true}" class="font-quattrocento-sans text-white transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer">What's New
             </p>
-            <fa-icon class="text-white text-3xl transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer"
+            <fa-icon routerLink="/profile" routerLinkActive="text-purple-300 underline underline-offset-8 decoration-4 rounded transition-all" [routerLinkActiveOptions]="{exact:true}" class="text-white text-3xl transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer"
                 [icon]="faCircleUser"></fa-icon>
-            <fa-icon class="text-white text-3xl transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer"
+            <fa-icon routerLink="/cart" routerLinkActive="text-purple-300 underline underline-offset-8 decoration-4 rounded transition-all" [routerLinkActiveOptions]="{exact:true}" class="text-white text-3xl transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer"
                 [icon]="faShoppingCart"></fa-icon>
 
         </div>

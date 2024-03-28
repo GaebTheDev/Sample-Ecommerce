@@ -1,0 +1,7 @@
+
+@if(selectedProduct === undefined){
+    <app-sale-slider></app-sale-slider>
+    <app-product-list (productSelected)="onProductSelected($event)"></app-product-list>
+} @else {
+        <app-product-detail [selectedProduct]="selectedProduct" (back)="onProductDetailBack($event)" ></app-product-detail>
+}
