@@ -6,15 +6,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductsService {
-  private apiURL = 'https://fakestoreapi.com';
+  private apiURL = 'https://fakestoreapi.com/products';
 
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiURL + "/products");
+    return this.http.get<any[]>(this.apiURL);
   }
 
   getCategories(): Observable<string[]> {
-    return this.http.get<string[]>(this.apiURL + "/products/categories");
+    return this.http.get<string[]>(this.apiURL + "/categories");
   }
 }
