@@ -14,6 +14,10 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 export class ProductDetailComponent {
   faCircleArrowLeft = faCircleArrowLeft;
   faCartPlus = faCartPlus;
+
+  ngOnInit(){
+    window.scrollTo(0,0);
+  }
   
   @Input()
   selectedProduct: Product;
@@ -28,7 +32,6 @@ export class ProductDetailComponent {
 
   onAddToCart(){
     alert(this.selectedProduct.title);
-
   }
 
 }
