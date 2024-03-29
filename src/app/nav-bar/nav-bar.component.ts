@@ -4,7 +4,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { faShop } from '@fortawesome/free-solid-svg-icons';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { LoginModalComponent } from './login-modal/login-modal.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -22,7 +22,7 @@ export class NavBarComponent {
   faShop = faShop;
   faHouse = faHouse;
   faShoppingCart = faShoppingCart;
-  faCircleUser = faCircleUser;
+  faCircleQuestion = faCircleQuestion;
   isSidebarOpened : boolean = false;
 
   onBarsClick(){

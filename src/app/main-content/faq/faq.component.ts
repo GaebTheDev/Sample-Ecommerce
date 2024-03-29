@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { UnderConstructionComponent } from '../under-construction/under-construction.component';
 
 @Component({
-  selector: 'app-deals',
+  selector: 'app-faq',
   standalone: true,
   imports: [UnderConstructionComponent],
-  templateUrl: './deals.component.html',
-  styleUrl: './deals.component.css'
+  templateUrl: './faq.component.html',
+  styleUrl: './faq.component.css'
 })
-export class DealsComponent {
+export class FaqComponent {
 
 }
