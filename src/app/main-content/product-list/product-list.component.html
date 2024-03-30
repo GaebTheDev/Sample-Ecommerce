@@ -15,7 +15,7 @@
       @if (selectedCategory === 'all' && product.title.toLowerCase().includes(searchText.toLowerCase())){ 
           <app-product-tile [product]="product" (click)="onSelectedProduct(product)"> </app-product-tile>
       }
-      @else if (selectedCategory === product.category){ 
+      @else if (selectedCategory === product.category){
         @if(product.title.toLowerCase().includes(searchText.toLowerCase())){
             <app-product-tile [product]="product" (click)="onSelectedProduct(product)"> </app-product-tile>
         }
