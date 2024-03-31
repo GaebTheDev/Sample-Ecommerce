@@ -1,9 +1,11 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { ProductTileComponent } from './product-tile/product-tile.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { ProductsService } from '../../services/products.service';
 import { FilterCategoryComponent } from './filter-category/filter-category.component';
 import { Product } from '../../models/Product';
+import { Store } from '@ngrx/store';
+import { addProducts } from '../../shared/store/cart/product.actions';
 
 @Component({
   selector: 'app-product-list',
@@ -13,7 +15,8 @@ import { Product } from '../../models/Product';
   styleUrl: './product-list.component.css'
 })
 export class ProductListComponent implements OnInit {
-  products: any[] = [];
+  private store = inject(Store);
+  products: Product[] = [];
   categories: string[] = [];
   selectedCategory: string = 'all';
   searchText: string = '';
@@ -25,9 +28,13 @@ export class ProductListComponent implements OnInit {
   ngOnInit() {
     this.productService.getProducts().subscribe(response => {
       this.products = response;
+
+      //adding products to store
+      this.store.dispatch(addProducts({products: response}));
     }, (error) => {
       console.error(error);
     })
+    
   }
 
   onCategoryChanged(value: string) {
