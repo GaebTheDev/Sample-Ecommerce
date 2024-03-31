@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { UnderConstructionComponent } from '../under-construction/under-construction.component';
 import { Product } from '../../models/Product';
 import { CartTileComponent } from './cart-tile/cart-tile.component';
-import { ProductDetailComponent } from '../product-detail/product-detail.component';
+import { ProductDetailsCartComponent } from './product-details-cart/product-details-cart.component';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [UnderConstructionComponent, CartTileComponent, ProductDetailComponent],
+  imports: [UnderConstructionComponent, CartTileComponent, ProductDetailsCartComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
