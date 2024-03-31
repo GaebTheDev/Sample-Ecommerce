@@ -1,10 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Product } from '../../../models/Product';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Store } from '@ngrx/store';
+import { removeFromCart } from '../../../shared/store/cart/cart.actions';
 
 @Component({
   selector: 'app-product-details-cart',
@@ -14,7 +16,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
   styleUrl: './product-details-cart.component.css'
 })
 export class ProductDetailsCartComponent {
-
+  private store = inject(Store);
   faCircleArrowLeft = faCircleArrowLeft;
   faCartPlus = faCartPlus;
   faTrash = faTrash;
@@ -37,6 +39,11 @@ export class ProductDetailsCartComponent {
 
   onQuantityChanged() {
     console.log(this.quantity);
+  }
+
+  onRemoveFromCart(){
+    this.store.dispatch(removeFromCart());
+    console.log("Remove from Cart Success!");
   }
 
 }

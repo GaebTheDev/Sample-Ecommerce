@@ -6,13 +6,14 @@ import {
   createSelector,
   MetaReducer
 } from '@ngrx/store';
+import { cartReducer } from './cart.reducer';
 
 export interface State {
 
 }
 
 export const reducers: ActionReducerMap<State> = {
-
+  cart: cartReducer,
 };
 
 

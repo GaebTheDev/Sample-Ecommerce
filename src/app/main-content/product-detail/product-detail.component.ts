@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Product } from '../../models/Product';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -6,6 +6,8 @@ import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faMinus } from '@fortawesome/free-solid-svg-icons';
+import { Store } from '@ngrx/store';
+import { addToCart } from '../../shared/store/cart/cart.actions';
 
 @Component({
   selector: 'app-product-detail',
@@ -15,34 +17,35 @@ import { faMinus } from '@fortawesome/free-solid-svg-icons';
   styleUrl: './product-detail.component.css'
 })
 export class ProductDetailComponent {
-
+  private store = inject(Store);
   faCircleArrowLeft = faCircleArrowLeft;
   faCartPlus = faCartPlus;
   faPlus = faPlus;
   faMinus = faMinus;
   quantity = 1;
 
-  ngOnInit() {
-    window.scrollTo(0, 0);
+  ngOnInit(){
+    window.scrollTo(0,0);
   }
-
+  
   @Input()
   selectedProduct: Product;
 
   @Output()
   back: EventEmitter<string> = new EventEmitter<string>;
-
-  onBack() {
+  
+  onBack(){
     this.selectedProduct = undefined;
     this.back.emit("");
   }
 
-  onQuantityChanged() {
+  onQuantityChanged(){
     console.log(this.quantity);
   }
 
-  onAddToCart() {
-    alert(this.selectedProduct.title);
+  onAddToCart(){
+    this.store.dispatch(addToCart());
+    console.log("Add to Cart Success!");
   }
 
 }

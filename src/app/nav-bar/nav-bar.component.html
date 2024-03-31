@@ -3,18 +3,35 @@
         <div class="flex items-center hover:cursor-pointer">
             <fa-icon [icon]="faShop" class="text-4xl text-white mr-2"></fa-icon>
             <p class="text-3xl font-quattrocento text-white font-extrabold">E-com</p>
-        </div>  
+        </div>
         <div class="items-center space-x-4 md:space-x-10 lg:space-x-14 xl:space-x-20 hidden sm:flex ">
             <!-- <p routerLink="/" routerLinkActive="text-purple-300 underline underline-offset-8 decoration-4 rounded transition-all" [routerLinkActiveOptions]="{exact:true}" class="font-quattrocento-sans text-white transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer ">Home</p>
             <p routerLink="/deals" routerLinkActive="text-purple-300 underline underline-offset-8 decoration-4 rounded transition-all" [routerLinkActiveOptions]="{exact:true}" class="font-quattrocento-sans text-white transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer">Deals</p>
             <p routerLink="/whats-new" routerLinkActive="text-purple-300 underline underline-offset-8 decoration-4 rounded transition-all" [routerLinkActiveOptions]="{exact:true}" class="font-quattrocento-sans text-white transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer">What's New
             </p> -->
 
-            <fa-icon routerLink="/" routerLinkActive="text-purple-300 underline underline-offset-8 decoration-4 rounded transition-all" [routerLinkActiveOptions]="{exact:true}" class="text-white text-3xl transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer"
+            <fa-icon routerLink="/"
+                routerLinkActive="text-purple-300 underline underline-offset-8 decoration-4 rounded transition-all"
+                [routerLinkActiveOptions]="{exact:true}"
+                class="text-white text-3xl transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer"
                 [icon]="faHouse"></fa-icon>
-            <fa-icon routerLink="/cart" routerLinkActive="text-purple-300 underline underline-offset-8 decoration-4 rounded transition-all" [routerLinkActiveOptions]="{exact:true}" class="text-white text-3xl transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer"
-                [icon]="faShoppingCart"></fa-icon>
-            <fa-icon routerLink="/faq" routerLinkActive="text-purple-300 underline underline-offset-8 decoration-4 rounded transition-all" [routerLinkActiveOptions]="{exact:true}" class="text-white text-3xl transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer"
+            <div class="relative">
+                <fa-icon routerLink="/cart"
+                    routerLinkActive="text-purple-300 underline underline-offset-8 decoration-4 rounded transition-all"
+                    [routerLinkActiveOptions]="{exact:true}"
+                    class="text-white text-3xl transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer group"
+                    [icon]="faShoppingCart"></fa-icon>
+                @if ((productQuantity$ | async) > 0) {
+                <div class=" flex items-center justify-center absolute rounded-full h-5 w-5 bg-purple-300 -top-1 -right-1">
+                    <p class="text-xs text-purple-900">{{productQuantity$ | async}}</p>
+                </div>
+                }
+
+            </div>
+            <fa-icon routerLink="/faq"
+                routerLinkActive="text-purple-300 underline underline-offset-8 decoration-4 rounded transition-all"
+                [routerLinkActiveOptions]="{exact:true}"
+                class="text-white text-3xl transition-all py-3 px-1 hover:text-purple-300 hover:cursor-pointer"
                 [icon]="faCircleQuestion"></fa-icon>
 
         </div>
@@ -24,6 +41,3 @@
     </div>
 </div>
 @if (isSidebarOpened) {<app-sidebar (sideBarClosed)="closeSidebar()"></app-sidebar>}
-
-
-
