@@ -11,6 +11,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AsyncPipe } from '@angular/common';
+import { Cart } from '../models/Cart';
 
 
 @Component({
@@ -21,6 +22,10 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './nav-bar.component.css'
 })
 export class NavBarComponent {
+  constructor(){
+    this.cart$ = this.store.select('cart');
+  }
+  
   private store = inject(Store);
   faBars = faBars;
   faShop = faShop;
@@ -28,11 +33,9 @@ export class NavBarComponent {
   faShoppingCart = faShoppingCart;
   faCircleQuestion = faCircleQuestion;
   isSidebarOpened : boolean = false;
-  productQuantity$ : Observable<number>;
+  cart$ : Observable<Cart>;
 
-  constructor(){
-    this.productQuantity$ = this.store.select('cart');
-  }
+  
 
   onBarsClick(){
     console.log("bars pressed!");

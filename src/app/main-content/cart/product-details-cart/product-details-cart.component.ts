@@ -42,7 +42,9 @@ export class ProductDetailsCartComponent {
   }
 
   onRemoveFromCart(){
-    this.store.dispatch(removeFromCart());
+    this.quantity = 0;
+    //wala pa toh ginagawa
+    this.store.dispatch(removeFromCart({productId: this.selectedProduct.id}));
     console.log("Remove from Cart Success!");
   }
 

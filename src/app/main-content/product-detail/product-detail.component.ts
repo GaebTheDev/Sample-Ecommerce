@@ -44,7 +44,7 @@ export class ProductDetailComponent {
   }
 
   onAddToCart(){
-    this.store.dispatch(addToCart());
+    this.store.dispatch(addToCart({productId: this.selectedProduct.id, quantity: this.quantity}));
     console.log("Add to Cart Success!");
   }
 
