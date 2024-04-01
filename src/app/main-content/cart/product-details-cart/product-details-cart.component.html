@@ -23,12 +23,20 @@
                     <input
                         class="m-2 p-2 border font-quattrocento-sans text-lg sm:text-xl border-purple-600 rounded text-center w-3/6 max-w-72"
                         type="number" [(ngModel)]="quantity" (change)="onQuantityChanged()">
-                    <!-- </div> -->
+                    <!-- </div> --> 
                 </div>
 
-                <button type="button"
-                    class="bg-red-900 text-white text-xl md:text-2xl w-full p-2 md:p-3 font-quattrocento-sans rounded  hover:bg-red-600 active:bg-red-400 transition-all max-w-md mx-2" (click)="onRemoveFromCart()"><fa-icon
-                        [icon]="faTrash"></fa-icon> Remove all from cart</button>
+                    <button type="button"
+                        class="mb-2 bg-green-900 text-white text-xl md:text-2xl w-full p-2 md:p-3 font-quattrocento-sans rounded  hover:bg-green-600 active:bg-green-400 transition-all max-w-md"><fa-icon
+                            [icon]="faFloppyDisk"></fa-icon> Save Changes</button>
+
+                    <button type="button"
+                        class="bg-red-900 text-white text-xl md:text-2xl w-full p-2 md:p-3 font-quattrocento-sans rounded  hover:bg-red-600 active:bg-red-400 transition-all max-w-md"
+                        (click)="onRemoveFromCart()"><fa-icon [icon]="faTrash"></fa-icon> Remove all from cart</button>
+                
+
+
+
 
             </div>
         </div>

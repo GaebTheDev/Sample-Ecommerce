@@ -7,6 +7,7 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import { removeFromCart } from '../../../shared/store/cart/cart.actions';
+import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-product-details-cart',
@@ -19,6 +20,7 @@ export class ProductDetailsCartComponent {
   private store = inject(Store);
   faCircleArrowLeft = faCircleArrowLeft;
   faCartPlus = faCartPlus;
+  faFloppyDisk = faFloppyDisk;
   faTrash = faTrash;
   quantity = 1;
 
@@ -49,6 +51,7 @@ export class ProductDetailsCartComponent {
     this.store.dispatch(removeFromCart({productId: this.selectedProduct.id}));
     console.log("Remove from Cart Success!");
     this.cartProductDeleted.emit(this.selectedProduct);
+    this.back.emit("");
   }
 
 }
