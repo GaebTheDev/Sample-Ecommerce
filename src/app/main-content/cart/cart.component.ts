@@ -12,60 +12,68 @@ import { create } from 'domain';
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [UnderConstructionComponent, CartTileComponent, ProductDetailsCartComponent],
+  imports: [UnderConstructionComponent, CartTileComponent, ProductDetailsCartComponent, AsyncPipe],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
 export class CartComponent {
-  constructor(){
+  constructor() {
     this.store.select('products').subscribe(products => this.products = products);
     this.store.select('cart').subscribe(cart => this.cart = cart);
   }
 
   private store = inject(Store);
-  cartProducts : Product[] = [];
-  name : string = '';
-  cellphoneNumber : number = 0;
-  address : string = '';
-  total : number = 0;
-  selectedProduct : Product = undefined;
-  products : Product[];
-  cart : Cart;
+  cartProducts: Product[] = [];
+  name: string = '';
+  cellphoneNumber: number = 0;
+  address: string = '';
+  total: number = 0;
+  selectedProduct: Product = undefined;
+  products: Product[];
+  cart: Cart;
 
-  ngOnInit(){
+  ngOnInit() {
     this.createCart(this.products, this.cart, this.cartProducts);
     this.calculateTotal();
   }
 
-  calculateTotal(){
+  calculateTotal() {
     this.total = 0;
     for (let i = 0; i < this.cartProducts.length; i++) {
       this.total += this.cartProducts[i].price;
     }
   }
 
-  onCheckout(){
-    this.calculateTotal();
+  onCheckout() {
     alert("You checked out " + this.cartProducts.length + " items. The total price is " + this.total.toFixed(2));
   }
 
-  onProductSelect(product){
+  onProductSelect(product) {
     this.selectedProduct = product;
+    console.log("onProductSelect");
   }
 
-  onProductDetailBack($event){
+  onProductDetailBack($event) {
     this.selectedProduct = undefined;
+    console.log("onProductDetailBack");
   }
 
-  createCart(allProducts : Product[], cart : Cart ,cartProducts : Product[]){
+  onDeleteCartProduct(deletedProduct : Product){
+    console.log(this.cartProducts);
+    this.cartProducts = this.cartProducts.filter(product => product != deletedProduct);
+    console.log(this.cartProducts);
+    this.calculateTotal();
+  }
 
-    for (let i = 0; i < allProducts.length; i++) {
-      for (let j = 0; j < cart.products.length; j++) {
-        if(allProducts[i].id == cart.products[j].productId){
-          cartProducts.push(allProducts[i]);
+  createCart(allProducts: Product[], cart: Cart, cartProducts: Product[]) {
+    
+      for (let i = 0; i < allProducts.length; i++) {
+        for (let j = 0; j < cart.products.length; j++) {
+          if (allProducts[i].id == cart.products[j].productId) {
+            cartProducts.push(allProducts[i]);
+          }
         }
       }
-    }
   }
 
 }

@@ -35,8 +35,6 @@ export class NavBarComponent {
   isSidebarOpened : boolean = false;
   cart$ : Observable<Cart>;
 
-  
-
   onBarsClick(){
     console.log("bars pressed!");
     this.isSidebarOpened = true;

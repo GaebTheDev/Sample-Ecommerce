@@ -16,7 +16,6 @@ export class HomeComponent {
 
   onProductSelected(value: Product){
     this.selectedProduct = value;
-    console.log(this.selectedProduct);
   }
 
   onProductDetailBack($event){

@@ -32,6 +32,9 @@ export class ProductDetailsCartComponent {
   @Output()
   back: EventEmitter<string> = new EventEmitter<string>;
 
+  @Output()
+  cartProductDeleted : EventEmitter<Product> = new EventEmitter<Product>;
+
   onBack() {
     this.selectedProduct = undefined;
     this.back.emit("");
@@ -43,9 +46,9 @@ export class ProductDetailsCartComponent {
 
   onRemoveFromCart(){
     this.quantity = 0;
-    //wala pa toh ginagawa
     this.store.dispatch(removeFromCart({productId: this.selectedProduct.id}));
     console.log("Remove from Cart Success!");
+    this.cartProductDeleted.emit(this.selectedProduct);
   }
 
 }

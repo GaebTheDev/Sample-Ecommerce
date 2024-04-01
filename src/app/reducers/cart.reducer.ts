@@ -9,12 +9,12 @@ export const cartReducer = createReducer(
     on(addToCart, (state, action) => {
         //if product Id already exists, add quantity instead
         const newCart = new Cart([...state.products, {productId: action.productId, quantity: action.quantity}]);
-        console.log(newCart);
+        // console.log(newCart);
         return newCart;
     }),
     on(removeFromCart, (state, action) => {
         const newProductArray = state.products.filter((product,index) => state.products[index].productId != action.productId);
-        console.log(newProductArray);
+        // console.log(newProductArray);
         return new Cart(newProductArray);
     }),
 )
