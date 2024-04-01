@@ -13,4 +13,7 @@ export class CartTileComponent {
   @Input()
   product : Product = undefined;
 
+  @Input()
+  quantity : number = 1;
+
 }

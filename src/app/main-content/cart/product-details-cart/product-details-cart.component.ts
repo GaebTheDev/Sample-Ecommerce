@@ -22,7 +22,6 @@ export class ProductDetailsCartComponent {
   faCartPlus = faCartPlus;
   faFloppyDisk = faFloppyDisk;
   faTrash = faTrash;
-  quantity = 1;
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -30,6 +29,9 @@ export class ProductDetailsCartComponent {
 
   @Input()
   selectedProduct: Product;
+
+  @Input()
+  quantity = 1;
 
   @Output()
   back: EventEmitter<string> = new EventEmitter<string>;
@@ -43,13 +45,13 @@ export class ProductDetailsCartComponent {
   }
 
   onQuantityChanged() {
-    console.log(this.quantity);
+    // console.log(this.quantity);
   }
 
   onRemoveFromCart(){
     this.quantity = 0;
     this.store.dispatch(removeFromCart({productId: this.selectedProduct.id}));
-    console.log("Remove from Cart Success!");
+    // console.log("Remove from Cart Success!");
     this.cartProductDeleted.emit(this.selectedProduct);
     this.back.emit("");
   }

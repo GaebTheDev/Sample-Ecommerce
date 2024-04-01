@@ -16,7 +16,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 items-center w-full">
             @for (product of cartProducts; track $index) {
             <div class="w-full h-full">
-                <app-cart-tile [product]="product" (click)="onProductSelect(product)"></app-cart-tile>
+                <app-cart-tile [product]="product" [quantity]="cartProductsQuantity[$index]" (click)="onProductSelect(product)"></app-cart-tile>
             </div>
             }
         </div>
@@ -53,6 +53,6 @@
     </div>
 </div>
 } @else {
-<app-product-details-cart [selectedProduct]="selectedProduct" (back)="onProductDetailBack($event)"
+<app-product-details-cart [selectedProduct]="selectedProduct" [quantity]="selectedProductQuantity" (back)="onProductDetailBack($event)"
     (cartProductDeleted)="onDeleteCartProduct(selectedProduct)"></app-product-details-cart>
 }

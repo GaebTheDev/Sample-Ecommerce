@@ -1,7 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { addToCart, removeFromCart } from "../shared/store/cart/cart.actions";
 import { Cart } from "../models/Cart";
-import { faI } from "@fortawesome/free-solid-svg-icons";
 
 export const initialCart: Cart = new Cart([]);
 
@@ -9,10 +8,17 @@ export const cartReducer = createReducer(
     initialCart,
     on(addToCart, (state, action) => {
         let newCart;
-        newCart = state.products.filter(product => product.productId != action.productId );
+        let newQuantity : number = action.quantity;
+        newCart = state.products.filter(product => product.productId != action.productId);
 
-        const finalCart = new Cart([...newCart, {productId: action.productId, quantity: action.quantity}]);
-        console.log(finalCart);
+        for (let i = 0; i < state.products.length; i++) {
+            // If product is already in cart, add quantity instead
+            if(state.products[i].productId == action.productId){
+                newQuantity = state.products[i].quantity + action.quantity;
+            }
+        }
+        
+        const finalCart = new Cart([...newCart, {productId: action.productId, quantity: newQuantity}]);
         return finalCart;
     }),
     on(removeFromCart, (state, action) => {

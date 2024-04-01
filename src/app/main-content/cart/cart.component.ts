@@ -24,11 +24,13 @@ export class CartComponent {
 
   private store = inject(Store);
   cartProducts: Product[] = [];
+  cartProductsQuantity: number[] = [];
   name: string = '';
   cellphoneNumber: number = 0;
   address: string = '';
   total: number = 0;
   selectedProduct: Product = undefined;
+  selectedProductQuantity: number = 1;
   products: Product[];
   cart: Cart;
 
@@ -40,7 +42,7 @@ export class CartComponent {
   calculateTotal() {
     this.total = 0;
     for (let i = 0; i < this.cartProducts.length; i++) {
-      this.total += this.cartProducts[i].price;
+      this.total += this.cartProducts[i].price * this.cartProductsQuantity[i];
     }
   }
 
@@ -48,29 +50,36 @@ export class CartComponent {
     alert("You checked out " + this.cartProducts.length + " items. The total price is " + this.total.toFixed(2));
   }
 
-  onProductSelect(product) {
+  onProductSelect(product : Product) {
     this.selectedProduct = product;
-    console.log("onProductSelect");
+
+    //look for cart item with same id as product
+    for (let i = 0; i < this.cartProducts.length; i++) {
+      if(this.cartProducts[i].id == product.id){
+        this.selectedProductQuantity = this.cartProductsQuantity[i];
+      }
+      
+    }
+    // console.log("onProductSelect");
   }
 
   onProductDetailBack($event) {
     this.selectedProduct = undefined;
-    console.log("onProductDetailBack");
+    // console.log("onProductDetailBack");
   }
 
   onDeleteCartProduct(deletedProduct : Product){
-    console.log(this.cartProducts);
     this.cartProducts = this.cartProducts.filter(product => product != deletedProduct);
-    console.log(this.cartProducts);
     this.calculateTotal();
   }
 
   createCart(allProducts: Product[], cart: Cart, cartProducts: Product[]) {
-    
       for (let i = 0; i < allProducts.length; i++) {
         for (let j = 0; j < cart.products.length; j++) {
           if (allProducts[i].id == cart.products[j].productId) {
             cartProducts.push(allProducts[i]);
+            this.cartProductsQuantity.push(cart.products[j].quantity);
+            console.log(cart.products[j].quantity);
           }
         }
       }
