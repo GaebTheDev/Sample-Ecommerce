@@ -8,6 +8,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import { removeFromCart, updateCart } from '../../../shared/store/cart/cart.actions';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-product-details-cart',
@@ -19,6 +20,7 @@ import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 export class ProductDetailsCartComponent {
 
   private store = inject(Store);
+  private toast = inject(NgToastService);
   faCircleArrowLeft = faCircleArrowLeft;
   faCartPlus = faCartPlus;
   faFloppyDisk = faFloppyDisk;
@@ -40,10 +42,10 @@ export class ProductDetailsCartComponent {
   back: EventEmitter<string> = new EventEmitter<string>;
 
   @Output()
-  cartProductDeleted : EventEmitter<Product> = new EventEmitter<Product>;
+  cartProductDeleted: EventEmitter<Product> = new EventEmitter<Product>;
 
   @Output()
-  cartQuantityChanged : EventEmitter<number> = new EventEmitter<number>;
+  cartQuantityChanged: EventEmitter<number> = new EventEmitter<number>;
 
   onBack() {
     this.selectedProduct = undefined;
@@ -55,19 +57,26 @@ export class ProductDetailsCartComponent {
     // console.log(this.quantity);
   }
 
-  onSaveChanges(){
-    if(this.origQuantity != this.quantity){
-      this.cartQuantityChanged.emit(this.quantity);
-      this.store.dispatch(updateCart({productId: this.selectedProduct.id, quantity: this.quantity}));
-      this.back.emit("");
+  onSaveChanges() {
+    if (this.origQuantity != this.quantity) {
+      if (this.quantity > 0) {
+        this.cartQuantityChanged.emit(this.quantity);
+        this.store.dispatch(updateCart({ productId: this.selectedProduct.id, quantity: this.quantity }));
+        this.toast.success({ detail: "Changes saved", summary: this.selectedProduct.title + " quantity has been set to " + this.quantity, duration: 3000 })
+        this.back.emit("");
+      } else {
+        this.toast.error({ detail: "Invalid Quantity", summary: this.quantity + " is not a valid quantity", duration: 3000 })
+      }
+
     }
   }
 
-  onRemoveFromCart(){
+  onRemoveFromCart() {
     this.quantity = 0;
-    this.store.dispatch(removeFromCart({productId: this.selectedProduct.id}));
+    this.store.dispatch(removeFromCart({ productId: this.selectedProduct.id }));
     // console.log("Remove from Cart Success!");
     this.cartProductDeleted.emit(this.selectedProduct);
+    this.toast.info({ detail: "Product successfully removed", summary: this.selectedProduct.title + " has been removed from cart", duration: 3000 })
     this.back.emit("");
   }
 
