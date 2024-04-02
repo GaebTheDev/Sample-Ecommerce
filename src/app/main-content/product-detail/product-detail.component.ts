@@ -8,6 +8,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faMinus } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import { addToCart } from '../../shared/store/cart/cart.actions';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-product-detail',
@@ -17,6 +18,7 @@ import { addToCart } from '../../shared/store/cart/cart.actions';
   styleUrl: './product-detail.component.css'
 })
 export class ProductDetailComponent {
+  private toast = inject(NgToastService);
   private store = inject(Store);
   faCircleArrowLeft = faCircleArrowLeft;
   faCartPlus = faCartPlus;
@@ -24,28 +26,36 @@ export class ProductDetailComponent {
   faMinus = faMinus;
   quantity = 1;
 
-  ngOnInit(){
-    window.scrollTo(0,0);
+  ngOnInit() {
+    window.scrollTo(0, 0);
   }
-  
+
   @Input()
   selectedProduct: Product;
 
   @Output()
   back: EventEmitter<string> = new EventEmitter<string>;
-  
-  onBack(){
+
+  onBack() {
     this.selectedProduct = undefined;
     this.back.emit("");
   }
 
-  onQuantityChanged(){
+  onQuantityChanged() {
     // console.log(this.quantity);
   }
 
-  onAddToCart(){
-    this.store.dispatch(addToCart({productId: this.selectedProduct.id, quantity: this.quantity}));
-    this.back.emit("");
+  onAddToCart() {
+    if (this.quantity < 1) {
+      this.toast.error({ detail: "Invalid quantity",summary: "quantity must be equal or more than one", duration: 3000 });
+    } else {
+      this.store.dispatch(addToCart({ productId: this.selectedProduct.id, quantity: this.quantity }));
+      this.toast.success({ detail: "Added to cart successfully",summary: this.selectedProduct.title + " has been added",duration: 3000 });
+      this.back.emit("");
+    }
+
+
+    
   }
 
 }
