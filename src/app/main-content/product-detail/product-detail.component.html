@@ -7,7 +7,7 @@
             class="p-4 size-auto min-h-60 min-w-60 max-h-80 lg:max-h-full self-center border-2 border-purple-200 rounded mt-4 animate-float">
         <div class="flex flex-col lg:ml-4 lg:w-9/12 mb-4">
             <p class="text-2xl md:text-4xl mt-1 md:mt-2 font-quattrocento font-extrabold">{{selectedProduct.title}}</p>
-            <p class="text-sm md:text-lg font-quattrocento-sans text-purple-500 font-bold">{{selectedProduct.category}}
+            <p class="text-sm md:text-lg font-quattrocento-sans text-purple-500 font-bold">{{selectedProduct.category.charAt(0).toUpperCase() + selectedProduct.category.slice(1)}}
             </p>
             <p class="text-3xl md:text-4xl font-quattrocento text-purple-800 font-bold xl:px-2">
                 &#8369;{{selectedProduct.price}}</p>

@@ -40,11 +40,12 @@ export class ProductDetailComponent {
   }
 
   onQuantityChanged(){
-    console.log(this.quantity);
+    // console.log(this.quantity);
   }
 
   onAddToCart(){
     this.store.dispatch(addToCart({productId: this.selectedProduct.id, quantity: this.quantity}));
+    this.back.emit("");
   }
 
 }

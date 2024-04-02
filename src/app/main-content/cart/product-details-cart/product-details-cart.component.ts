@@ -56,8 +56,6 @@ export class ProductDetailsCartComponent {
   }
 
   onSaveChanges(){
-    console.log(this.origQuantity);
-    console.log(this.quantity);
     if(this.origQuantity != this.quantity){
       this.cartQuantityChanged.emit(this.quantity);
       this.store.dispatch(updateCart({productId: this.selectedProduct.id, quantity: this.quantity}));

@@ -47,7 +47,7 @@ export class CartComponent {
   }
 
   onCheckout() {
-    alert("You checked out " + this.cartProducts.length + " items. The total price is " + this.total.toFixed(2));
+    alert("You checked out " + this.cartProducts.length + " items with a total quantity of " + this.cartProductsQuantity.reduce((total, next) => total += next) + ". The total price is " + this.total.toFixed(2));
   }
 
   onProductSelect(product: Product) {
@@ -90,7 +90,6 @@ export class CartComponent {
         if (allProducts[i].id == cart.products[j].productId) {
           cartProducts.push(allProducts[i]);
           this.cartProductsQuantity.push(cart.products[j].quantity);
-          console.log(cart.products[j].quantity);
         }
       }
     }
