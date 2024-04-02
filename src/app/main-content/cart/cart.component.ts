@@ -50,15 +50,15 @@ export class CartComponent {
     alert("You checked out " + this.cartProducts.length + " items. The total price is " + this.total.toFixed(2));
   }
 
-  onProductSelect(product : Product) {
+  onProductSelect(product: Product) {
     this.selectedProduct = product;
 
     //look for cart item with same id as product
     for (let i = 0; i < this.cartProducts.length; i++) {
-      if(this.cartProducts[i].id == product.id){
+      if (this.cartProducts[i].id == product.id) {
         this.selectedProductQuantity = this.cartProductsQuantity[i];
       }
-      
+
     }
     // console.log("onProductSelect");
   }
@@ -68,21 +68,32 @@ export class CartComponent {
     // console.log("onProductDetailBack");
   }
 
-  onDeleteCartProduct(deletedProduct : Product){
+  onDeleteCartProduct(deletedProduct: Product) {
     this.cartProducts = this.cartProducts.filter(product => product != deletedProduct);
     this.calculateTotal();
   }
 
+  onCartQuantityChanged(quantity: number) {
+    this.selectedProductQuantity = quantity;
+    for (let i = 0; i < this.cartProducts.length; i++) {
+      if (this.cartProducts[i].id == this.selectedProduct.id) {
+        this.cartProductsQuantity[i] = quantity;
+      }
+    }
+    this.calculateTotal();
+  }
+
+
   createCart(allProducts: Product[], cart: Cart, cartProducts: Product[]) {
-      for (let i = 0; i < allProducts.length; i++) {
-        for (let j = 0; j < cart.products.length; j++) {
-          if (allProducts[i].id == cart.products[j].productId) {
-            cartProducts.push(allProducts[i]);
-            this.cartProductsQuantity.push(cart.products[j].quantity);
-            console.log(cart.products[j].quantity);
-          }
+    for (let i = 0; i < allProducts.length; i++) {
+      for (let j = 0; j < cart.products.length; j++) {
+        if (allProducts[i].id == cart.products[j].productId) {
+          cartProducts.push(allProducts[i]);
+          this.cartProductsQuantity.push(cart.products[j].quantity);
+          console.log(cart.products[j].quantity);
         }
       }
+    }
   }
 
 }

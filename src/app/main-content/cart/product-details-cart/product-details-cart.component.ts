@@ -6,7 +6,7 @@ import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
-import { removeFromCart } from '../../../shared/store/cart/cart.actions';
+import { removeFromCart, updateCart } from '../../../shared/store/cart/cart.actions';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -17,14 +17,17 @@ import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
   styleUrl: './product-details-cart.component.css'
 })
 export class ProductDetailsCartComponent {
+
   private store = inject(Store);
   faCircleArrowLeft = faCircleArrowLeft;
   faCartPlus = faCartPlus;
   faFloppyDisk = faFloppyDisk;
   faTrash = faTrash;
+  origQuantity = 1;
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    this.origQuantity = this.quantity;
   }
 
   @Input()
@@ -39,13 +42,27 @@ export class ProductDetailsCartComponent {
   @Output()
   cartProductDeleted : EventEmitter<Product> = new EventEmitter<Product>;
 
+  @Output()
+  cartQuantityChanged : EventEmitter<number> = new EventEmitter<number>;
+
   onBack() {
     this.selectedProduct = undefined;
     this.back.emit("");
   }
 
   onQuantityChanged() {
+    // console.log(this.origQuantity);
     // console.log(this.quantity);
+  }
+
+  onSaveChanges(){
+    console.log(this.origQuantity);
+    console.log(this.quantity);
+    if(this.origQuantity != this.quantity){
+      this.cartQuantityChanged.emit(this.quantity);
+      this.store.dispatch(updateCart({productId: this.selectedProduct.id, quantity: this.quantity}));
+      this.back.emit("");
+    }
   }
 
   onRemoveFromCart(){

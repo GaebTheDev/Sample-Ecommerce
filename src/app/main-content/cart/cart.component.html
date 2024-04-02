@@ -54,5 +54,5 @@
 </div>
 } @else {
 <app-product-details-cart [selectedProduct]="selectedProduct" [quantity]="selectedProductQuantity" (back)="onProductDetailBack($event)"
-    (cartProductDeleted)="onDeleteCartProduct(selectedProduct)"></app-product-details-cart>
+    (cartProductDeleted)="onDeleteCartProduct(selectedProduct)" (cartQuantityChanged)="onCartQuantityChanged($event)"></app-product-details-cart>
 }
