@@ -16,13 +16,15 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 items-center w-full">
             @for (product of cartProducts; track $index) {
             <div class="w-full h-full">
-                <app-cart-tile [product]="product" [quantity]="cartProductsQuantity[$index]" (click)="onProductSelect(product)"></app-cart-tile>
+                <app-cart-tile [product]="product" [quantity]="cartProductsQuantity[$index]"
+                    (click)="onProductSelect(product)"></app-cart-tile>
             </div>
             }
         </div>
         } @else {
         <div class="w-full h-full">
-            <p class="font-quattrocento text-purple-600 text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-center my-4">No items added to cart</p>
+            <p class="font-quattrocento text-purple-600 text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-center my-4">
+                No items added to cart</p>
         </div>
         }
 
@@ -35,24 +37,26 @@
         </div>
 
         <!-- User Information Form -->
-        <div class="flex flex-col p-2 lg:p-4 xl:p-8 w-full bg-purple-200 rounded-xl mt-4 lg:mt-8">
+        <form [formGroup]="checkoutForm" (ngSubmit)="onCheckout()"
+            class="flex flex-col p-2 lg:p-4 xl:p-8 w-full bg-purple-200 rounded-xl mt-4 lg:mt-8">
 
             <p class="font-quattrocento font-semibold text-purple-800 lg:text-lg ml-0 m-2">Name</p>
-            <input class="p-2 xl:text-lg rounded text-sm lg:text-base" type="text">
+            <input class="p-2 xl:text-lg rounded text-sm lg:text-base" type="text" formControlName="name">
 
             <p class="font-quattrocento font-semibold text-purple-800 lg:text-lg ml-0 m-2">Cellphone Number</p>
-            <input class="p-2 xl:text-lg rounded text-sm lg:text-base" type="number">
+            <input class="p-2 xl:text-lg rounded text-sm lg:text-base" type="number" formControlName="cellphoneNumber">
 
             <p class="font-quattrocento font-semibold text-purple-800 lg:text-lg ml-0 m-2">Address</p>
-            <input class="p-2 xl:text-lg rounded text-sm lg:text-base" type="text">
+            <input class="p-2 xl:text-lg rounded text-sm lg:text-base" type="text" formControlName="address">
 
             <button
                 class="w-min self-center font-quattrocento-sans text-purple-600 mt-4 hover:text-purple-500 active:text-purple-400 text-xl sm:text-2xl lg:text-3xl"
-                (click)="onCheckout()">Checkout</button>
-        </div>
+                type="submit">Checkout</button>
+        </form>
     </div>
 </div>
 } @else {
-<app-product-details-cart [selectedProduct]="selectedProduct" [quantity]="selectedProductQuantity" (back)="onProductDetailBack($event)"
-    (cartProductDeleted)="onDeleteCartProduct(selectedProduct)" (cartQuantityChanged)="onCartQuantityChanged($event)"></app-product-details-cart>
+<app-product-details-cart [selectedProduct]="selectedProduct" [quantity]="selectedProductQuantity"
+    (back)="onProductDetailBack($event)" (cartProductDeleted)="onDeleteCartProduct(selectedProduct)"
+    (cartQuantityChanged)="onCartQuantityChanged($event)"></app-product-details-cart>
 }

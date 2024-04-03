@@ -68,6 +68,8 @@ export class ProductDetailsCartComponent {
         this.toast.error({ detail: "Invalid Quantity", summary: this.quantity + " is not a valid quantity", duration: 3000 })
       }
 
+    } else {
+      this.back.emit("");
     }
   }
 

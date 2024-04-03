@@ -47,15 +47,15 @@ export class ProductDetailComponent {
 
   onAddToCart() {
     if (this.quantity < 1) {
-      this.toast.error({ detail: "Invalid quantity",summary: "quantity must be equal or more than one", duration: 3000 });
+      this.toast.error({ detail: "Invalid quantity", summary: "quantity must be equal or more than one", duration: 3000 });
     } else {
       this.store.dispatch(addToCart({ productId: this.selectedProduct.id, quantity: this.quantity }));
-      this.toast.success({ detail: "Added to cart successfully",summary: this.selectedProduct.title + " has been added",duration: 3000 });
+      this.toast.success({ detail: "Added to cart successfully", summary: this.selectedProduct.title + " has been added", duration: 3000 });
       this.back.emit("");
     }
 
 
-    
+
   }
 
 }

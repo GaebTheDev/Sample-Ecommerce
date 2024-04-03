@@ -4,15 +4,14 @@ import { Product } from '../../models/Product';
 import { CartTileComponent } from './cart-tile/cart-tile.component';
 import { ProductDetailsCartComponent } from './product-details-cart/product-details-cart.component';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { Cart } from '../../models/Cart';
-import { create } from 'domain';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [UnderConstructionComponent, CartTileComponent, ProductDetailsCartComponent, AsyncPipe],
+  imports: [UnderConstructionComponent, CartTileComponent, ProductDetailsCartComponent, AsyncPipe, ReactiveFormsModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
@@ -25,14 +24,17 @@ export class CartComponent {
   private store = inject(Store);
   cartProducts: Product[] = [];
   cartProductsQuantity: number[] = [];
-  name: string = '';
-  cellphoneNumber: number = 0;
-  address: string = '';
   total: number = 0;
   selectedProduct: Product = undefined;
   selectedProductQuantity: number = 1;
   products: Product[];
   cart: Cart;
+
+  checkoutForm = new FormGroup({
+    name: new FormControl(''),
+    cellphoneNumber: new FormControl(),
+    address: new FormControl(''),
+  })
 
   ngOnInit() {
     this.createCart(this.products, this.cart, this.cartProducts);
@@ -47,7 +49,10 @@ export class CartComponent {
   }
 
   onCheckout() {
-    alert("You checked out " + this.cartProducts.length + " items with a total quantity of " + this.cartProductsQuantity.reduce((total, next) => total += next) + ". The total price is " + this.total.toFixed(2));
+    // alert("You checked out " + this.cartProducts.length + " items. The total price is " + this.total.toFixed(2));
+    console.log(this.checkoutForm.get("name").value);
+    console.log(this.checkoutForm.get("cellphoneNumber").value);
+    console.log(this.checkoutForm.get("address").value);
   }
 
   onProductSelect(product: Product) {
@@ -69,6 +74,11 @@ export class CartComponent {
   }
 
   onDeleteCartProduct(deletedProduct: Product) {
+    for (let i = 0; i < this.cartProducts.length; i++) {
+      if (this.cartProducts[i].id == deletedProduct.id) {
+        this.cartProductsQuantity.splice(i, i);
+      }
+    }
     this.cartProducts = this.cartProducts.filter(product => product != deletedProduct);
     this.calculateTotal();
   }
