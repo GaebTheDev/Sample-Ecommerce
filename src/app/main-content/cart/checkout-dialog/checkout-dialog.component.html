@@ -1,36 +1,47 @@
 <mat-dialog-content>
     <div class="flex flex-col p-4">
-        <h2 class="text-purple-800 font-quattrocento text-3xl text-center font-semibold mb-2">Checkout Successful!</h2>
-    
-        <div class="bg-purple-800 p-2 rounded text-white mb-2">
-    
-            <p class="font-bold font-quattrocento m-2 text-xl">Buyer Information</p>
-    
-            <p class="font-bold font-quattrocento text-purple-200 text-sm">Name</p>
-            <p class="font-quattrocento-sans mb-2">{{data.name}}</p>
-    
-            <p class="font-bold font-quattrocento text-purple-200 text-sm">Cellphone Number</p>
-            <p class="font-quattrocento-sans mb-2">{{data.cellphoneNumber}}</p>
-    
-            <p class="font-bold font-quattrocento text-purple-200 text-sm">Address</p>
-            <p class="font-quattrocento-sans">{{data.address}}</p>
+        <h2 class="text-purple-800 font-quattrocento text-3xl md:text-4xl text-center font-semibold mb-2">Checkout
+            Successful!</h2>
+
+        <div class="bg-purple-800 p-2 rounded md:text-base text-white mb-2">
+
+            <p class="font-bold font-quattrocento my-2 text-xl md:text-2xl">Buyer Information</p>
+
+            <p class="font-bold font-quattrocento text-purple-200 text-sm md:text-base">Name</p>
+            <p class="font-quattrocento-sans mb-2 md:text-lg">{{data.name}}</p>
+
+            <p class="font-bold font-quattrocento text-purple-200 text-sm md:text-base">Cellphone Number</p>
+            <p class="font-quattrocento-sans mb-2 md:text-lg">{{data.cellphoneNumber}}</p>
+
+            <p class="font-bold font-quattrocento text-purple-200 text-sm md:text-base">Address</p>
+            <p class="font-quattrocento-sans md:text-lg">{{data.address}}</p>
         </div>
-    
-        <p class="text-purple-800 font-quattrocento text-xl text-start font-semibold mb-4 self-center">Items checked out</p>
-    
-        @for (product of data.cartProducts; track $index) {
-        <div class="flex flex-col items-center w-full my-2 rounded-lg">
-            <img class="max-h-40" src="{{product.image}}">
-            <p class="font-quattrocento font-semibold text-xl">{{product.title}}</p>
-            <p class="font-quattrocento font-semibold text-purple-800">{{product.category.charAt(0).toUpperCase() + product.category.slice(1)}}</p>
-            <p class="font-quattrocento-sans text-sm">&#8369;{{product.price}}</p>
-            <p class="font-quattrocento-sans text-sm">quantity: {{data.cartProductsQuantity[$index]}}</p>
+
+        <p class="text-purple-800 font-quattrocento text-xl md:text-2xl text-start font-semibold mb-4 self-center">Items
+            checked out</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+            @for (product of data.cartProducts; track $index) {
+            <div class="flex flex-col items-center w-full my-2 md:my-4 p-2 rounded-lg justify-between">
+                <div class="flex flex-col items-center w-full">
+                    <img class="max-h-40 rounded-lg" src="{{product.image}}">
+                    <p class="font-quattrocento font-semibold text-xl md:text-2xl text-center">{{product.title}}</p>
+                </div>
+                <div class="w-full items-center justify-center text-center">
+                    <p class="font-quattrocento font-semibold text-purple-800 md:text-xl">
+                        {{product.category.charAt(0).toUpperCase() + product.category.slice(1)}}</p>
+                    <p class="font-quattrocento-sans text-sm md:text-lg">&#8369;{{product.price}}</p>
+                    <p class="font-quattrocento-sans text-sm md:text-lg">quantity: {{data.cartProductsQuantity[$index]}}
+                    </p>
+                </div>
+            </div>
+            }
         </div>
-        }
-    
+
+
         <div class="bg-purple-200 rounded my-4">
-            <p class="font-quattrocento-sans text-center text-purple-800 p-2 text-xl">Total: <span
-                    class="font-bold">&#8369;{{data.total}}</span></p>
+            <p class="font-quattrocento-sans text-center text-purple-800 p-2 text-xl md:text-2xl">Total: <span
+                    class="font-bold">&#8369;{{data.total.toFixed(2)}}</span></p>
         </div>
     </div>
 </mat-dialog-content>
