@@ -37,9 +37,9 @@ export class CartComponent {
   cart: Cart;
 
   checkoutForm = new FormGroup({
-    name: new FormControl(''),
-    cellphoneNumber: new FormControl(),
-    address: new FormControl(''),
+    name: new FormControl('', [Validators.required]),
+    cellphoneNumber: new FormControl(undefined, [Validators.required]),
+    address: new FormControl('', [Validators.required]),
   })
 
   ngOnInit() {
@@ -59,8 +59,13 @@ export class CartComponent {
       this.toast.error({ detail: "Checkout failed", summary: "Please add items to your cart", duration: 3000 })
 
     } else {
-      this.toast.success({ detail: "Checkout successful", summary: this.cartProducts.length + (this.cartProducts.length == 1 ? " item has been checked out" : " items has been checked out"), duration: 3000 })
-      this.openCheckoutDialog();
+      if (this.checkoutForm.valid) {
+        this.toast.success({ detail: "Checkout successful", summary: this.cartProducts.length + (this.cartProducts.length == 1 ? " item has been checked out" : " items has been checked out"), duration: 3000 })
+        this.openCheckoutDialog();
+      }else {
+        this.toast.error({ detail: "Checkout failed", summary: "Please enter a valid input for each field", duration: 3000 })
+      }
+
     }
   }
 

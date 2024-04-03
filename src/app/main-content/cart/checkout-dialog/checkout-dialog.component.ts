@@ -1,11 +1,11 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef} from '@angular/material/dialog';
 import { Product } from '../../../models/Product';
 
 @Component({
   selector: 'app-checkout-dialog',
   standalone: true,
-  imports: [MatDialogTitle, MatDialogContent],
+  imports: [MatDialogContent, MatDialogActions],
   templateUrl: './checkout-dialog.component.html',
   styleUrl: './checkout-dialog.component.css'
 })
