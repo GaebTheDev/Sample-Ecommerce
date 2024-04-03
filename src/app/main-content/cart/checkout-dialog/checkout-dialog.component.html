@@ -1,0 +1,33 @@
+<div class="flex flex-col overflow-scroll max-h-96 p-4">
+    <h2 class="text-purple-800 font-quattrocento text-3xl text-center font-semibold mb-2">Checkout Successful!</h2>
+    <div class="bg-purple-800 p-2 rounded text-white mb-2">
+
+        <p class="font-bold font-quattrocento m-2 text-xl">Buyer Information</p>
+
+        <p class="font-bold font-quattrocento text-purple-200 text-sm">Name</p>
+        <p class="font-quattrocento-sans mb-2">{{data.name}}</p>
+
+        <p class="font-bold font-quattrocento text-purple-200 text-sm">Cellphone Number</p>
+        <p class="font-quattrocento-sans mb-2">{{data.cellphoneNumber}}</p>
+
+        <p class="font-bold font-quattrocento text-purple-200 text-sm">Address</p>
+        <p class="font-quattrocento-sans">{{data.address}}</p>
+    </div>
+    <p class="text-purple-800 font-quattrocento text-xl text-start font-semibold mb-4">Items checked out</p>
+
+    @for (product of data.cartProducts; track $index) {
+    <div class="flex flex-col items-center w-full my-2 rounded-lg">
+        <img class="max-h-40" src="{{product.image}}">
+        <p class="font-quattrocento font-semibold text-xl">{{product.title}}</p>
+        <p class="font-quattrocento font-semibold text-purple-800">{{product.category}}</p>
+        <p class="font-quattrocento-sans text-sm">&#8369;{{product.price}}</p>
+        <p class="font-quattrocento-sans text-sm">quantity: {{data.cartProductsQuantity[$index]}}</p>
+    </div>
+    }
+
+    <div class="bg-purple-200 rounded my-4">
+        <p class="font-quattrocento-sans text-center text-purple-800 p-2 text-xl">Total: <span class="font-bold">&#8369;{{data.total}}</span></p>
+    </div>
+
+    <button class="font-quattrocento-sans bg-purple-800 text-white rounded py-2 px-4 self-center" (click)="onGoBackPressed()">Go back</button>
+</div>

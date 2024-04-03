@@ -7,11 +7,14 @@ import { Store } from '@ngrx/store';
 import { AsyncPipe } from '@angular/common';
 import { Cart } from '../../models/Cart';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NgToastService } from 'ng-angular-popup';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { CheckoutDialogComponent } from './checkout-dialog/checkout-dialog.component';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [UnderConstructionComponent, CartTileComponent, ProductDetailsCartComponent, AsyncPipe, ReactiveFormsModule],
+  imports: [UnderConstructionComponent, CartTileComponent, MatDialogModule, ProductDetailsCartComponent, AsyncPipe, ReactiveFormsModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
@@ -19,9 +22,12 @@ export class CartComponent {
   constructor() {
     this.store.select('products').subscribe(products => this.products = products);
     this.store.select('cart').subscribe(cart => this.cart = cart);
+
   }
 
   private store = inject(Store);
+  private toast = inject(NgToastService);
+  private dialog = inject(MatDialog);
   cartProducts: Product[] = [];
   cartProductsQuantity: number[] = [];
   total: number = 0;
@@ -49,10 +55,37 @@ export class CartComponent {
   }
 
   onCheckout() {
-    // alert("You checked out " + this.cartProducts.length + " items. The total price is " + this.total.toFixed(2));
-    console.log(this.checkoutForm.get("name").value);
-    console.log(this.checkoutForm.get("cellphoneNumber").value);
-    console.log(this.checkoutForm.get("address").value);
+    if (this.cartProducts.length < 1) {
+      this.toast.error({ detail: "Checkout failed", summary: "Please add items to your cart", duration: 3000 })
+
+    } else {
+      this.toast.success({ detail: "Checkout successful", summary: this.cartProducts.length + (this.cartProducts.length == 1 ? " item has been checked out" : " items has been checked out"), duration: 3000 })
+      this.openCheckoutDialog();
+    }
+  }
+
+  openCheckoutDialog() {
+    const dialogRef = this.dialog.open(CheckoutDialogComponent, {
+      autoFocus: false,
+      data: {
+        cartProducts: this.cartProducts,
+        cartProductsQuantity: this.cartProductsQuantity,
+        total: this.total,
+        name: this.checkoutForm.get("name").value,
+        cellphoneNumber: this.checkoutForm.get("cellphoneNumber").value,
+        address: this.checkoutForm.get("address").value
+        // cartProducts: [
+        //   new Product(2, "Product Title", 100, "men's clothing", "sample description", "assets/images/purple-cart.png"),
+        //   new Product(2, "Product Title", 100, "men's clothing", "sample description", "assets/images/purple-cart.png"),
+        //   new Product(2, "Product Title", 100, "men's clothing", "sample description", "assets/images/purple-cart.png"),
+        // ],
+        // cartProductsQuantity: [2,4,7],
+        // total: 300,
+        // name: "jake",
+        // cellphoneNumber: "09145435744",
+        // address: "Regala Building Quezon City Osaka"
+      },
+    })
   }
 
   onProductSelect(product: Product) {

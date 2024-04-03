@@ -10,6 +10,7 @@ import { removeFromCart, updateCart } from '../../../shared/store/cart/cart.acti
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 import { NgToastService } from 'ng-angular-popup';
 
+
 @Component({
   selector: 'app-product-details-cart',
   standalone: true,
@@ -59,15 +60,16 @@ export class ProductDetailsCartComponent {
 
   onSaveChanges() {
     if (this.origQuantity != this.quantity) {
+      //if cart is has product/s, run first code
       if (this.quantity > 0) {
         this.cartQuantityChanged.emit(this.quantity);
         this.store.dispatch(updateCart({ productId: this.selectedProduct.id, quantity: this.quantity }));
         this.toast.success({ detail: "Changes saved", summary: this.selectedProduct.title + " quantity has been set to " + this.quantity, duration: 3000 })
+
         this.back.emit("");
       } else {
         this.toast.error({ detail: "Invalid Quantity", summary: this.quantity + " is not a valid quantity", duration: 3000 })
       }
-
     } else {
       this.back.emit("");
     }
