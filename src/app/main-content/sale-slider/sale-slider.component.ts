@@ -9,11 +9,12 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SaleSliderComponent {
-  imgUrls = ["https://lzd-img-global.slatic.net/g/tps/imgextra/i3/O1CN01zFkFKb1V3TWR5QaCN_!!6000000002597-0-tps-1976-688.jpg_2200x2200q80.jpg",
-    "https://lzd-img-global.slatic.net/g/tps/imgextra/i4/O1CN01hUfawS1n7kIZrNk6T_!!6000000005043-0-tps-1976-688.jpg_2200x2200q80.jpg",
-    "https://lzd-img-global.slatic.net/g/tps/imgextra/i4/O1CN01ifXkjT275irWQKMIh_!!6000000007746-0-tps-1976-688.jpg_2200x2200q80.jpg",
-    "https://lzd-img-global.slatic.net/g/tps/imgextra/i3/O1CN01kIIQwk1FLJ5ce49rH_!!6000000000470-0-tps-1976-688.jpg_2200x2200q80.jpg",
-    "https://lzd-img-global.slatic.net/g/tps/imgextra/i3/O1CN01vLoJTI1K6iYARheX9_!!6000000001115-0-tps-1976-688.jpg_2200x2200q80.jpg",
-    "https://lzd-img-global.slatic.net/g/tps/imgextra/i2/O1CN01QfZV011FN8fsjrCuD_!!6000000000474-0-tps-1976-688.jpg_2200x2200q80.jpg",
+  imgUrls = [
+    "https://static.vecteezy.com/system/resources/previews/006/934/808/non_2x/3d-rendering-concept-of-e-commerce-online-shopping-smartphone-with-gift-boxes-balloons-and-text-sale-floating-on-background-for-commercial-design-grey-and-yellow-theme-3d-render-free-photo.jpg",
+    "https://static.vecteezy.com/system/resources/previews/008/879/375/large_2x/great-discount-and-sale-promotion-concept-gift-boxes-with-sale-word-floating-3d-rendering-free-photo.jpg",
+    "https://static.vecteezy.com/system/resources/previews/008/879/138/non_2x/great-discount-and-sale-promotion-concept-object-collection-with-shopping-cart-sale-word-balloons-and-gift-boxes-3d-rendering-free-photo.jpg",
+    "https://static.vecteezy.com/system/resources/previews/008/879/730/non_2x/great-discount-and-sale-promotion-concept-yellow-sale-word-isolated-on-white-background-3d-rendering-free-photo.jpg",
+    "https://static.vecteezy.com/system/resources/thumbnails/002/317/244/small/realistic-neon-lamp-with-the-word-sale-in-pink-free-photo.jpg",
+    "https://static.vecteezy.com/system/resources/previews/006/241/366/large_2x/sale-promotion-70-percent-off-with-3d-podium-for-product-presentation-free-photo.jpg",
   ];
 }
